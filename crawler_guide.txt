@@ -1,20 +1,30 @@
+【爬蟲流程】
+決定從網頁中爬取的資料 → 分析網頁原始碼 → 撰寫爬蟲 →　儲存成結構化資料
+
 【模組 requests】
 通常需先安裝 #pip install requests，
 並使用import requests 導入
 用於請求網站的模組
+-基本指令
+    1. requests.get(url, headers) : 用於抓取網頁資料
+    2. response.status_code : 請求的狀態，正確狀態代碼可由F12「網路」中的「Gerneral」確認，
+            錯誤通常為404。
 
 【模組 Beautifulsoup】
 通常需先安裝 #pip install beautifulsoup4，
 並使用from bs4 import BeautifulSoup 導入
 可用於分析網頁的原始碼
-
-
-【爬蟲流程】
-決定從網頁中爬取的資料 → 分析網頁原始碼 → 撰寫爬蟲 →　儲存成結構化資料
-
-【基本代碼】
-requests.get(url, headers) : 用於抓取網頁資料
-response.status_code : 請求的狀態，正確狀態可由F12「網路」中的「Gerneral」確認，錯誤通常為404
+-基本指令
+    1. BeautifulSoup(response.text, "html.parser") : 建立一個beautifulSoup物件，
+            分析response.text, 並使用html的解析器(該解析器為python內建)。
+    2. soup.find_all("div", class_ = "r-ent") : 尋找soup內的所有節點， 
+            並將所有div中class為"r-ent"的節點return，該回傳值為一個BeautifulSoup的列表，
+            可對該列表進行迴圈等，其中class_中，要尋找的名稱需從F12內分析
+    3. item.find("div", class_="title") : 尋找item內的所有節點，
+            將"第一個"找到的div中class名為"title"的節點，並return該節點的BeautifulSoup物件
+    4. BS.div.a : 可對所有BS物件做類似的事情，該指令會回傳BS物件中，
+            找到的"第一個"div節點的"第一個"a節點，但需做存在判定，若不存在將會報錯
+    5. BS.div.a.text : 回傳該節點的文字
 
 【headers】
 在HTTP的協定中，發出請求時，通常會夾帶一個 header，其中header 是一個字典，
@@ -22,8 +32,8 @@ header會包含有關請求的各種資訊，如瀏覽器類型、Cookie、Accep
 而header所需的項目可從F12檢視頁面中的「網路」，查看每項資料的要求方法(Request Method)
 可以通過設置header來模擬瀏覽器行為，避免被網站封鎖或限制。
 -常見headers
-    1.cookie: 紀錄使用者的動作，如已勾選「接受18+」
-    2.User-Agent: 記錄使用者的系統版本、瀏覽器版本等等，常用於基本的反爬蟲
+    1. cookie: 紀錄使用者的動作，如已勾選「接受18+」
+    2. User-Agent: 記錄使用者的系統版本、瀏覽器版本等等，常用於基本的反爬蟲
 -使用方法
     C_chat版有18+限制，其中該限制是由Cookie所記錄，
     我們需通過設置Cookie讓我們能順利抓取C_chat版的內容。
@@ -40,8 +50,19 @@ json檔案是一種輕量級的資料交換格式，常用於將結構化的資�
 主要由鍵值對(key-value pairs)組成，並使用大括號'{}'包圍，鍵值對之間用逗號','分隔。
 廣泛應用於API前後端資料交換、跨平台通信、網路傳輸。
 -json的好處
-    1.易於理解和使用: 簡潔的文本格式表示結構化的資料，容易閱讀、理解、編寫且不需特殊工具
-    2.跨平台、語言的支援: json支援多種程式語言和平台，使用json來傳輸資料無須擔心相容性問題
-    3.輕量級和高效: json的表示方式簡潔而高校，使其在網路傳輸、儲存時佔用資源較少
+    1. 易於理解和使用: 簡潔的文本格式表示結構化的資料，容易閱讀、理解、編寫且不需特殊工具
+    2. 跨平台、語言的支援: json支援多種程式語言和平台，使用json來傳輸資料無須擔心相容性問題
+    3. 輕量級和高效: json的表示方式簡潔而高校，使其在網路傳輸、儲存時佔用資源較少
+-寫入方式
+    1. with open ("ptt_C_chat.json","w", encoding="utf-8") as file:
+            json.dump(data_list, file, ensure_ascii=False, indent = 4) :
+        -data_list: 將data_list儲存成json檔案，該data_list為含多個字典的list，也就是 [{},{}]
+        -encoding: 將檔案以"utf-8"格式儲存
+        -ensure_ascii: 不將無法辨識的字體轉為ascii碼(避免中文出錯)
+        -indent: json的檔案空格設定為4，方便閱讀
+    
+
+
+    
 
 

@@ -5,6 +5,8 @@
 from bs4 import BeautifulSoup
 import requests
 import json
+import pandas as pd
+
 
 url = "https://www.ptt.cc/bbs/C_Chat/index.html" # ptt C_chat版網址
 my_headers = {'cookie': 'over18=l'} 
@@ -50,7 +52,15 @@ for item in articles:
     data_list.append(data)
 
     #print (f'{popular} {title} {date}')
-    with open ("ptt_C_chat.json","w", encoding="utf-8") as file:
-        json.dump(data_list, file, ensure_ascii=False, indent = 4)
-        #將資料寫成json檔，將data_list的資料寫入file,不將非ASCII字符轉義(如中文)，使用四個空格作為縮排
+
+#儲存為json檔
+with open ("ptt_C_chat.json","w", encoding="utf-8") as file:
+    json.dump(data_list, file, ensure_ascii=False, indent = 4)
+    #將資料寫成json檔，將data_list的資料寫入file,不將非ASCII字符轉義(如中文)，使用四個空格作為縮排
 print("已成功將資料匯入json檔案")
+
+#儲存為excel檔
+df = pd.DataFrame(data_list) # 先將其轉為pd內的DataFrame格式
+df.to_excel("ptt_C_chat.xlsx", index = False, engine = "openpyxl") # to_後有很多儲存的格式可以選
+    # 將該DataFrame儲存為excel的格式，關閉索引標籤、寫入Excel檔案的引擎為"openpyxl"
+print("已成功將資料匯入excel")
