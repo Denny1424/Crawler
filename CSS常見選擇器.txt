@@ -1,0 +1,31 @@
+【BeautifulSoup 中的 CSS】
+ptt_C_Chat爬文抓圖中，有條指令
+article_a = article_body.select('a:not(span a)')
+其中"article_body"為一個BS的物件
+bs.select() 的括號中使用的是CSS的語法，
+可用CSS的選擇器對節點做想要的選擇，會return一個含所有符合條件的節點的list
+(其回傳結構與 bs.find_all() 相同)
+如該指令意思為「選取所有不包含被span包住的元素<a>
+
+【常用的選擇器】
+1. element: 選取所有指定元素類型的元素，例如 
+            div、p、a 等。
+2. .class: 選擇所有指定類別名稱的元素，例如 
+            .highlight、.container 等。
+3. #id: 選擇具有指定 id 屬性的元素，例如 
+            #header、#footer 等。
+4. selector1, selector2: 同時選擇多個元素，例如 
+            div, p 選擇所有 <div> 和 <p> 元素。
+5. selector1 selector2: 選擇指定元素的後代元素，例如 
+            ul li 選擇所有 <ul> 元素下的 <li> 元素。
+6. selector1 > selector2: 選擇指定元素的直接子元素，例如 
+            ul > li 選擇所有 <ul> 元素的直接子元素 <li>。
+7. selector1 + selector2: 選擇指定元素的相鄰兄弟元素，例如 
+            h2 + p 選擇所有緊接在 <h2> 元素後面的 <p> 元素。
+8. :pseudo-class: 偽類，選擇元素的特定狀態，例如 
+            :hover 選擇滑鼠懸停在元素上的狀態
+            :first-child 選擇父元素中的第一個子元素
+            :not(span a) 選擇不是被span包住的a的所有元素
+9. ::pseudo-element: 為元素的特定部分套用樣式，例如 
+            ::before 在元素內容前插入內容，
+            ::after 在元素內容後插入內容等。

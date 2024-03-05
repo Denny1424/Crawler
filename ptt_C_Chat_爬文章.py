@@ -9,7 +9,7 @@ import pandas as pd
 
 
 url = "https://www.ptt.cc/bbs/C_Chat/index.html" # ptt C_chat版網址
-my_headers = {'cookie': 'over18=l'} 
+my_headers = {'Cookie': 'over18=l'} 
 response = requests.get(url, headers = my_headers) 
 soup = BeautifulSoup(response.text, "html.parser") # 先建立一個beautifulSoup物件
     # 分析response.text, 並使用html的解析器

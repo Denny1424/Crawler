@@ -1,0 +1,34 @@
+【基本用法】
+-基本的range
+    1. from tqdm import tange (或是 from tqdm.rich 會有彩色的)
+    2. 直接把原本range(x) 改成trange(x)
+-自訂長度的迴圈
+    1. from tqdm import tqdm
+    2. 把 in 後面的東西最外面加上一層 tqdm()
+
+
+【一些bug說明】
+1. 進度條會一直向下滾動的話是因為太長了，要修改ncols或是dynamic_ncols
+
+
+
+
+
+
+【常見參數】
+
+1. `total`：總共要迭代的次數或元素的總數。
+2. `desc`：進度條的描述資訊。
+3. `leave`：當循環結束時是否保留進度條，預設為 `False`。
+4. `ncols`：指定進度條的寬度（以字元數為單位）。
+5. `position`：指定進度條的位置，可以是 `top`、`bottom` 或一個整數，用於在多個進度條之間進行排列。
+6. `file`：指定輸出進度條的文件對象，預設為標準輸出。
+7. `unit`：每個迭代的單位。
+8. `unit_scale`：如果設定為 `True`，將自動調整 `unit` 和 `unit_scale`，以便更好地顯示大量資料的單位。
+9. `dynamic_ncols`：如果設定為 `True`，進度條的寬度將動態調整以適應目前終端視窗的大小。
+10. `position`：指定多個進度條的位置，以便在相同介面上同時顯示多個進度條。
+11. `bar_format`：允許自訂進度條的格式，包括進度百分比、已完成任務數量、剩餘時間等。
+12. `initial`：指定進度條的初始值。
+13. `ascii`：強制使用 ASCII 字元來繪製進度條，而不是 Unicode 字元。
+14. `colour`：啟用或停用進度條的顏色。
+15. `mininterval` 和 `miniters`：控制進度條的更新頻率，避免過於頻繁的更新。
